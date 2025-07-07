@@ -1,8 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { User, Calendar, ClipboardList } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function CarCard({ car }) {
   const { name, type, price, image } = car;
+  const navigate = useNavigate();
+
+  const handleViewDetails = () => {
+    const slug = name.toLowerCase().replace(/\s+/g, "-");
+    navigate(`/cars/${slug}`);
+  };
 
   return (
     <div className="bg-background border border-border rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col overflow-hidden h-full">
@@ -23,7 +30,10 @@ export default function CarCard({ car }) {
         <h3 className="text-xl font-semibold text-foreground">{name}</h3>
         <span className="text-sm text-muted-foreground">{type}</span>
 
-        <Button className="mt-4 px-6 text-sm font-medium shadow hover:shadow-md transition-all">
+        <Button
+          onClick={handleViewDetails}
+          className="mt-4 px-6 text-sm font-medium shadow hover:shadow-md transition-all"
+        >
           View Details
         </Button>
       </div>

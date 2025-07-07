@@ -1,5 +1,5 @@
 import CarCarousel from "./car-carousel/CarCarousel";
-
+import { cars } from "../components/car-carousel/cars";
 export default function PopularCars() {
   return (
     <section className="bg-muted py-20">
@@ -11,7 +11,7 @@ export default function PopularCars() {
           Check out our most popular cars and find the perfect one for you
         </p>
 
-        <CarCarousel />
+        <CarCarousel cars={cars} />
       </div>
     </section>
   );

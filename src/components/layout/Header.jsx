@@ -25,7 +25,7 @@ export function Header() {
           <img
             src={logo}
             alt="Al Shamel Rent a Car"
-            className="h-12 w-auto object-contain"
+            className="h-16 w-auto object-contain"
           />
         </Link>
 
@@ -56,7 +56,7 @@ export function Header() {
           </Button>
           <Button
             variant="secondary"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/my-accout")}
             className="gap-1"
           >
             <LogIn className="w-4 h-4" />
@@ -64,7 +64,7 @@ export function Header() {
           </Button>
           <Button
             variant="secondary"
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/my-accout")}
             className="gap-1"
           >
             <UserPlus className="w-4 h-4" />
@@ -138,7 +138,7 @@ export function Header() {
               variant="secondary"
               onClick={() => {
                 setMenuOpen(false);
-                navigate("/login");
+                navigate("/my-accout");
               }}
               className="w-full gap-1"
             >
@@ -149,7 +149,7 @@ export function Header() {
               variant="secondary"
               onClick={() => {
                 setMenuOpen(false);
-                navigate("/register");
+                navigate("/my-accout");
               }}
               className="w-full gap-1"
             >

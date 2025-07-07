@@ -17,36 +17,101 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
 
-const locations = ["Muscat", "Nizwa", "Salalah", "Sohar", "Sur"];
-const carClasses = [
-  "SUV",
-  "Compact",
-  "Intermediate",
-  "Crossover",
-  "4x4",
-  "AWD",
-];
-const timeSlots = [
-  "08:00 AM",
-  "09:00 AM",
-  "10:00 AM",
-  "11:00 AM",
-  "12:00 PM",
-  "01:00 PM",
-  "02:00 PM",
-  "03:00 PM",
-  "04:00 PM",
-  "05:00 PM",
-  "06:00 PM",
-  "07:00 PM",
+const locations = [
+  "Muscat International Airport",
+  "Centara Muscat Hotel–Ghala Heights",
+  "City Seasons Hotel Muscat",
+  "Crown Plaza OCEC - Muscat",
+  "Ghala City Office",
+  "Golden Oasis Hotel -Muscat",
+  "Hilton Garden Inn – Al Khuwair",
+  "Ibis Hotel - Muscat",
+  "Intercontental Hotel - Muscat",
+  "Mall of Oman",
+  "Marriott hotel OCEC - Muscat",
+  "Muscat Grand Mall",
+  "Al Mouj Muscat ( The wave)",
+  "MUSPark Inn Hotel - Muscat",
+  "Novotel Hotel & Resorts - Muscat",
+  "Ruwi",
+  "Shatti Al Qurum - Muscat",
+  "Sultan Qaboos University (SQU)",
+  "Muscat, Ghala, opposite Centara Hotel",
+  "Muscat, Ghobra, opposite Royal Tulip Hotel",
 ];
 
-export default function CarSearchFilters() {
+const carClasses = [
+  "Compact",
+  "Intermediate",
+  "SUV",
+  "Station Wagon",
+  "Sedan",
+  "Hatchback",
+  "Family MPV",
+  "4x4",
+  "AWD",
+  "Crossover",
+];
+
+const timeSlots = [
+  "Midnight",
+  "12:30 AM",
+  "1:00 AM",
+  "1:30 AM",
+  "2:00 AM",
+  "2:30 AM",
+  "3:00 AM",
+  "3:30 AM",
+  "4:00 AM",
+  "4:30 AM",
+  "5:00 AM",
+  "5:30 AM",
+  "6:00 AM",
+  "6:30 AM",
+  "7:00 AM",
+  "7:30 AM",
+  "8:00 AM",
+  "8:30 AM",
+  "9:00 AM",
+  "9:30 AM",
+  "10:00 AM",
+  "10:30 AM",
+  "11:00 AM",
+  "11:30 AM",
+  "Noon",
+  "12:30 PM",
+  "1:00 PM",
+  "1:30 PM",
+  "2:00 PM",
+  "2:30 PM",
+  "3:00 PM",
+  "3:30 PM",
+  "4:00 PM",
+  "4:30 PM",
+  "5:00 PM",
+  "5:30 PM",
+  "6:00 PM",
+  "6:30 PM",
+  "7:00 PM",
+  "7:30 PM",
+  "8:00 PM",
+  "8:30 PM",
+  "9:00 PM",
+  "9:30 PM",
+  "10:00 PM",
+  "10:30 PM",
+  "11:00 PM",
+  "11:30 PM",
+];
+
+export default function CarSearchFilters({ className = "" }) {
   const [pickupDate, setPickupDate] = useState(null);
   const [returnDate, setReturnDate] = useState(null);
 
   return (
-    <section className="bg-background md:border md:border-border shadow-sm rounded-none md:rounded-xl py-8 -mt-16 relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      className={`bg-background  py-8 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}
+    >
       <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Pick-Up Location */}
         <div className="flex flex-col gap-2">

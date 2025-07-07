@@ -199,3 +199,7 @@
     font-size: var(--text-9xl);
   }
 }
+.writing-vertical-lr {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
