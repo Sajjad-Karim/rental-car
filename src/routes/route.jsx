@@ -8,6 +8,7 @@ import Cars from "../pages/rent-cars";
 import Trems from "../pages/terms-conditions";
 import AuthPage from "../pages/auth";
 import CarDetailsPage from "../pages/cars-detail";
+import FAQS from "../pages/faqs";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         element: <Contact />,
         path: "contact-us",
+      },
+      {
+        element: <FAQS />,
+        path: "faqs",
       },
       {
         element: <NotFound />,

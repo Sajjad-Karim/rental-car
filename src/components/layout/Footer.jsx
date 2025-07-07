@@ -1,4 +1,5 @@
 import { Mail, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -9,19 +10,19 @@ export default function Footer() {
           <h4 className="text-xl font-bold mb-4">Vehicles Type</h4>
           <ul className="space-y-2 text-muted">
             <li>
-              <a href="#" className="hover:text-primary transition">
+              <Link to="/cars" className="hover:text-primary transition">
                 Our Cars
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-primary transition">
+              <Link to="/about" className="hover:text-primary transition">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-primary transition">
+              <Link to="/contact-us" className="hover:text-primary transition">
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -31,29 +32,29 @@ export default function Footer() {
           <h4 className="text-xl font-bold mb-4">Quick Links</h4>
           <ul className="space-y-2 text-muted">
             <li>
-              <a href="#" className="hover:text-primary transition">
+              <Link to="/about" className="hover:text-primary transition">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-primary transition">
+              <Link to="/contact-us" className="hover:text-primary transition">
                 Contact Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-primary transition">
+              <Link to="/faqs" className="hover:text-primary transition">
                 FAQs
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-primary transition">
+              <Link to="/terms" className="hover:text-primary transition">
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-primary transition">
+              <Link to="/terms" className="hover:text-primary transition">
                 Terms & Conditions
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
