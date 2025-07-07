@@ -2,12 +2,12 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CarList from "./CarList";
 
 export default function CarCarousel({ cars }) {
   const navigate = useNavigate();
-
+  const { pathname } = useLocation();
   const [sliderRef, instanceRef] = useKeenSlider({
     loop: true,
     slides: {
@@ -46,13 +46,17 @@ export default function CarCarousel({ cars }) {
 
       {/* CTA */}
       <div className="mt-10 flex justify-center">
-        <Button
-          variant="outline"
-          className="gap-1"
-          onClick={() => navigate("/cars")}
-        >
-          Go to all Cars <ArrowRight className="w-4 h-4" />
-        </Button>
+        {pathname == "/cars" ? (
+          <></>
+        ) : (
+          <Button
+            variant="outline"
+            className="gap-1"
+            onClick={() => navigate("/cars")}
+          >
+            Go to all Cars <ArrowRight className="w-4 h-4" />
+          </Button>
+        )}
       </div>
     </div>
   );
