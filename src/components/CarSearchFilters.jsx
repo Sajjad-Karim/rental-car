@@ -185,17 +185,23 @@ export default function CarSearchFilters({ className = "" }) {
                 )}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="" align="start">
-              <DayPicker
-                mode="single"
-                selected={pickupDate}
-                onSelect={setPickupDate}
-                className="w-fit bg-background"
-                modifiersClassNames={{
-                  selected: "bg-primary text-primary-foreground",
-                  today: "font-semibold text-primary",
-                }}
-              />
+            <PopoverContent
+              className="p-0  max-w-full  w-fit shadow-lg border rounded-md bg-background z-50"
+              align="start"
+              sideOffset={4}
+            >
+              <div className="p-3">
+                <DayPicker
+                  mode="single"
+                  selected={pickupDate}
+                  onSelect={setPickupDate}
+                  className="bg-background w-fit"
+                  modifiersClassNames={{
+                    selected: "bg-primary text-primary-foreground",
+                    today: "font-semibold text-primary",
+                  }}
+                />
+              </div>
             </PopoverContent>
           </Popover>
         </div>
@@ -235,7 +241,7 @@ export default function CarSearchFilters({ className = "" }) {
               </Button>
             </PopoverTrigger>
             <PopoverContent
-              className="p-0 w-[280px] max-w-full shadow-lg border rounded-md bg-white z-50"
+              className="p-0  max-w-full  w-fit shadow-lg border rounded-md bg-background z-50"
               align="start"
               sideOffset={4}
             >
