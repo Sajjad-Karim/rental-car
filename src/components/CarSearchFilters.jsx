@@ -248,8 +248,8 @@ export default function CarSearchFilters({ className = "" }) {
               <div className="p-3">
                 <DayPicker
                   mode="single"
-                  selected={pickupDate}
-                  onSelect={setPickupDate}
+                  selected={returnDate}
+                  onSelect={setReturnDate}
                   className="bg-background w-fit"
                   modifiersClassNames={{
                     selected: "bg-primary text-primary-foreground",
