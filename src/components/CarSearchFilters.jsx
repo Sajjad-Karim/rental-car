@@ -14,8 +14,8 @@ import {
 } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
+import "react-day-picker/dist/style.css";
 
 const locations = [
   "Muscat International Airport",
@@ -104,57 +104,78 @@ const timeSlots = [
   "11:30 PM",
 ];
 
-export default function CarSearchFilters({ className = "" }) {
+export default function CarSearchFilters({ className = "", onSearch }) {
   const [pickupDate, setPickupDate] = useState(null);
   const [returnDate, setReturnDate] = useState(null);
+  const [pickupLocation, setPickupLocation] = useState("");
+  const [returnLocation, setReturnLocation] = useState("");
+  const [pickupTime, setPickupTime] = useState("");
+  const [returnTime, setReturnTime] = useState("");
+  const [carClass, setCarClass] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (onSearch) {
+      onSearch({
+        pickupDate,
+        returnDate,
+        pickupLocation,
+        returnLocation,
+        pickupTime,
+        returnTime,
+        carClass,
+      });
+    }
+  };
 
   return (
     <section
-      className={`bg-background  py-8 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}
+      className={`bg-background py-8 max-w-screen-xl mx-auto px-4 ${className}`}
     >
-      <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Pick-Up Location */}
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+      >
+        {/* Selects and pickers */}
         <div className="flex flex-col gap-2">
           <label className="text-sm text-muted-foreground">
             Pick-Up Location
           </label>
-          <Select>
+          <Select onValueChange={setPickupLocation}>
             <SelectTrigger className="w-full cursor-pointer">
               <SelectValue placeholder="Select location" />
             </SelectTrigger>
             <SelectContent>
-              {locations.map((city) => (
-                <SelectItem key={city} value={city}>
-                  {city}
+              {locations.map((loc) => (
+                <SelectItem key={loc} value={loc}>
+                  {loc}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
 
-        {/* Return Location */}
         <div className="flex flex-col gap-2">
           <label className="text-sm text-muted-foreground">
             Return Location
           </label>
-          <Select>
+          <Select onValueChange={setReturnLocation}>
             <SelectTrigger className="w-full cursor-pointer">
               <SelectValue placeholder="Select location" />
             </SelectTrigger>
             <SelectContent>
-              {locations.map((city) => (
-                <SelectItem key={city} value={city}>
-                  {city}
+              {locations.map((loc) => (
+                <SelectItem key={loc} value={loc}>
+                  {loc}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
 
-        {/* Car Class */}
         <div className="flex flex-col gap-2">
-          <label className="text-sm text-muted-foreground">Class</label>
-          <Select>
+          <label className="text-sm text-muted-foreground">Car Class</label>
+          <Select onValueChange={setCarClass}>
             <SelectTrigger className="w-full cursor-pointer">
               <SelectValue placeholder="Select class" />
             </SelectTrigger>
@@ -168,119 +189,87 @@ export default function CarSearchFilters({ className = "" }) {
           </Select>
         </div>
 
-        {/* Pick-Up Date */}
         <div className="flex flex-col gap-2">
           <label className="text-sm text-muted-foreground">Pick-Up Date</label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className="justify-start text-left w-full cursor-pointer"
+                className="justify-start cursor-pointer text-left w-full"
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {pickupDate ? (
-                  format(pickupDate, "PPP")
-                ) : (
-                  <span>Select date</span>
-                )}
+                {pickupDate ? format(pickupDate, "PPP") : "Select date"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent
-              className="p-0  max-w-full  w-fit shadow-lg border rounded-md bg-background z-50"
-              align="start"
-              sideOffset={4}
-            >
-              <div className="p-3">
-                <DayPicker
-                  mode="single"
-                  selected={pickupDate}
-                  onSelect={setPickupDate}
-                  className="bg-background w-fit"
-                  modifiersClassNames={{
-                    selected: "bg-primary text-primary-foreground",
-                    today: "font-semibold text-primary",
-                  }}
-                />
-              </div>
+            <PopoverContent className="p-0 w-fit">
+              <DayPicker
+                selected={pickupDate}
+                onSelect={setPickupDate}
+                mode="single"
+              />
             </PopoverContent>
           </Popover>
         </div>
 
-        {/* Pick-Up Time */}
         <div className="flex flex-col gap-2">
           <label className="text-sm text-muted-foreground">Pick-Up Time</label>
-          <Select>
+          <Select onValueChange={setPickupTime}>
             <SelectTrigger className="w-full cursor-pointer">
               <SelectValue placeholder="Select time" />
             </SelectTrigger>
             <SelectContent>
-              {timeSlots.map((time) => (
-                <SelectItem key={time} value={time}>
-                  {time}
+              {timeSlots.map((t) => (
+                <SelectItem key={t} value={t}>
+                  {t}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
 
-        {/* Return Date */}
         <div className="flex flex-col gap-2">
           <label className="text-sm text-muted-foreground">Return Date</label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className="justify-start text-left w-full cursor-pointer"
+                className="justify-start cursor-pointer text-left w-full"
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {returnDate ? (
-                  format(returnDate, "PPP")
-                ) : (
-                  <span>Select date</span>
-                )}
+                {returnDate ? format(returnDate, "PPP") : "Select date"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent
-              className="p-0  max-w-full  w-fit shadow-lg border rounded-md bg-background z-50"
-              align="start"
-              sideOffset={4}
-            >
-              <div className="p-3">
-                <DayPicker
-                  mode="single"
-                  selected={returnDate}
-                  onSelect={setReturnDate}
-                  className="bg-background w-fit"
-                  modifiersClassNames={{
-                    selected: "bg-primary text-primary-foreground",
-                    today: "font-semibold text-primary",
-                  }}
-                />
-              </div>
+            <PopoverContent className="p-0 w-fit">
+              <DayPicker
+                selected={returnDate}
+                onSelect={setReturnDate}
+                mode="single"
+              />
             </PopoverContent>
           </Popover>
         </div>
 
-        {/* Return Time */}
         <div className="flex flex-col gap-2">
           <label className="text-sm text-muted-foreground">Return Time</label>
-          <Select>
+          <Select onValueChange={setReturnTime}>
             <SelectTrigger className="w-full cursor-pointer">
               <SelectValue placeholder="Select time" />
             </SelectTrigger>
             <SelectContent>
-              {timeSlots.map((time) => (
-                <SelectItem key={time} value={time}>
-                  {time}
+              {timeSlots.map((t) => (
+                <SelectItem key={t} value={t}>
+                  {t}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
 
-        {/* Search Button - appears last on mobile, first visually on desktop */}
         <div className="flex items-end lg:row-start-1 lg:col-start-4">
-          <Button type="submit" className="w-full text-base h-[42px]">
+          <Button
+            type="submit"
+            className="w-full cursor-pointer text-base h-[42px]"
+          >
             Search
           </Button>
         </div>

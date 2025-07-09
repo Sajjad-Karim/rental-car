@@ -1,21 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import HeroSection from "../../components/HeroSection";
 import CarSearchFilters from "../../components/CarSearchFilters";
 import PopularCars from "../../components/PopularCards";
 import WhyChooseUs from "../../components/WhyChooseUs";
 import TestimonialsSection from "../../components/TestimonialsSection";
 import FaqSection from "../../components/FaqSection";
+import SearchResults from "../../components/SearchResults";
+import RentalOptions from "../../components/RentalOptions";
+import RentalSummaryDetails from "../../components/RentalSummaryDetails";
 
 const Home = () => {
+  const [searchData, setSearchData] = useState(null);
+  const [selectedCar, setSelectedCar] = useState(null);
+  const [showSummary, setShowSummary] = useState(false);
+  const [selectedExtras, setSelectedExtras] = useState([]);
   return (
     <div>
-      {/* HERO + OVERLAP */}
+      {/* === HERO + FILTERS === */}
       <div className="relative">
         <HeroSection />
-        <div className="relative z-10 lg:absolute lg:inset-x-0 lg:bottom-0 lg:translate-y-1/1">
-          <CarSearchFilters className="-mt-16 relative z-10 md:border md:border-border shadow-sm rounded-none md:rounded-xl" />
+        {/* Remove absolute positioning to keep everything in normal flow */}
+        <div className="relative z-10 -mt-16 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CarSearchFilters
+            onSearch={(data) => {
+              setSearchData(data);
+              setSelectedCar(null);
+            }}
+            className="md:border md:border-border shadow-sm rounded-none md:rounded-xl"
+          />
         </div>
       </div>
+
+      {searchData && !selectedCar && !showSummary && (
+        <SearchResults data={searchData} onChoose={setSelectedCar} />
+      )}
+
+      {searchData && selectedCar && !showSummary && (
+        <RentalOptions
+          data={searchData}
+          car={selectedCar}
+          onContinue={(extras) => {
+            setSelectedExtras(extras);
+            setShowSummary(true);
+          }}
+        />
+      )}
+
+      {searchData && selectedCar && showSummary && (
+        <RentalSummaryDetails
+          data={searchData}
+          car={selectedCar}
+          selectedExtras={selectedExtras}
+        />
+      )}
+
+      {/* === STATIC SECTIONS === */}
       <div className="h-0 lg:h-50 bg-muted" />
       <PopularCars />
       <WhyChooseUs />
