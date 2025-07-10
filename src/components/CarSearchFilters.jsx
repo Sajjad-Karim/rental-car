@@ -104,7 +104,12 @@ const timeSlots = [
   "11:30 PM",
 ];
 
-export default function CarSearchFilters({ className = "", onSearch }) {
+export default function CarSearchFilters({
+  className = "",
+  onSearch,
+  onReset,
+  isCompact = false,
+}) {
   const [pickupDate, setPickupDate] = useState(null);
   const [returnDate, setReturnDate] = useState(null);
   const [pickupLocation, setPickupLocation] = useState("");
@@ -127,6 +132,21 @@ export default function CarSearchFilters({ className = "", onSearch }) {
       });
     }
   };
+
+  // ✅ Show only "Clear Search" button if in compact mode
+  if (isCompact) {
+    return (
+      <div
+        className={`bg-background py-4 max-w-screen-xl mx-auto px-4 ${className}`}
+      >
+        <div className="flex justify-start w-full">
+          <Button className="w-full" onClick={onReset}>
+            Clear Search
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section

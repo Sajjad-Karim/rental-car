@@ -14,23 +14,40 @@ const Home = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const [showSummary, setShowSummary] = useState(false);
   const [selectedExtras, setSelectedExtras] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false); // ✅ NEW STATE
+
+  const handleSearch = (data) => {
+    setSearchData(data);
+    setSelectedCar(null);
+    setShowSummary(false);
+    setHasSearched(true);
+  };
+
+  const handleReset = () => {
+    setSearchData(null);
+    setSelectedCar(null);
+    setShowSummary(false);
+    setSelectedExtras([]);
+    setHasSearched(false); // ✅ Return to full filters form
+  };
+
   return (
     <div>
       {/* === HERO + FILTERS === */}
       <div className="relative">
         <HeroSection />
-        {/* Remove absolute positioning to keep everything in normal flow */}
         <div className="relative z-10 -mt-16 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
           <CarSearchFilters
-            onSearch={(data) => {
-              setSearchData(data);
-              setSelectedCar(null);
-            }}
+            onSearch={handleSearch}
+            onReset={handleReset}
+            showReset={hasSearched}
+            isCompact={hasSearched} // ✅ only show "Clear Search" button
             className="md:border md:border-border shadow-sm rounded-none md:rounded-xl"
           />
         </div>
       </div>
 
+      {/* === CONDITIONAL FLOW === */}
       {searchData && !selectedCar && !showSummary && (
         <SearchResults data={searchData} onChoose={setSelectedCar} />
       )}
